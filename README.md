@@ -6,6 +6,65 @@ O objetivo foi construir um sistema simples em Java para gerenciar as locações
 
 ---
 
+## 🏛️ Diagrama do Sistema
+
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Conta {
+        -Cliente cliente
+        -int numero
+        -double saldoDevedor
+        -Locacao[] historicoLocacao
+        +Conta()
+        +Conta(Cliente, int)
+        +locarFilmes(Filme[]) void
+        +pagarDebito(double) void
+        +extratoHistorico() String
+    }
+
+    class Cliente {
+        -String nome
+        -String cpf
+        -String endereco
+        -String telefone
+        +Cliente()
+        +Cliente(String, String, String, String)
+    }
+
+    class Locacao {
+        -Date data
+        -double valorTotalAPagar
+        -Filme[] listaFilmes
+        +Locacao()
+        +Locacao(Date)
+        +addFilme(Filme) void
+    }
+
+    class Filme {
+        -String titulo
+        -int ano
+        -String genero
+        -double valorLocacao
+        +Filme()
+        +Filme(String, int, String, double)
+    }
+
+    %% --- Relacionamentos ---
+    %% Uma Conta "tem um" Cliente
+    Conta --> "1" Cliente
+
+    %% Uma Conta "tem várias" Locações (até 20)
+    Conta --> "0..20" Locacao
+
+    %% Uma Locação "tem vários" Filmes (até 10)
+    Locacao --> "0..10" Filme
+````
+
+---
+
 ## 💻 Tecnologias Utilizadas
 
 * **Linguagem:** Java
@@ -14,7 +73,7 @@ O objetivo foi construir um sistema simples em Java para gerenciar as locações
 
 ---
 
-## 🏛️ Estrutura do Projeto
+## 🏗️ Estrutura do Projeto
 
 O código-fonte (`src`) foi organizado nos seguintes pacotes, conforme solicitado:
 
